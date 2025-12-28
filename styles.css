@@ -1,0 +1,230 @@
+/* Reset */
+* {
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+:root {
+  --bg: #f4f6f8;
+  --page-padding: 40px;
+  --container-bg: #ffffff;
+  --container-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  --primary: #2563eb;
+  --primary-hover: #1e40af;
+  --success: #10b981;
+  --danger: #ef4444;
+  --muted: #6b7280;
+  --card-border: #e6e6e6;
+  --input-border: #cccccc;
+  --text: #111827;
+  --subtext: #374151;
+  --chart-bg: #ffffff;
+  --chart-stack-bg: #f8fafc;
+  --progress-bg: #e5e7eb;
+  --progress-paid: #22c55e;
+  --tooltip-bg: rgba(17,24,39,0.95);
+  --tooltip-text: #fff;
+  --sticky-text: #071124;
+}
+
+[data-theme="dark"] {
+  --bg: #0b1220;
+  --container-bg: #071124;
+  --container-shadow: none;
+  --primary: #60a5fa;
+  --primary-hover: #3b82f6;
+  --success: #34d399;
+  --danger: #fb7185;
+  --muted: #9ca3af;
+  --card-border: #1f2937;
+  --input-border: #334155;
+  --text: #e6eef8;
+  --subtext: #cbd5e1;
+  --chart-bg: #071127;
+  --chart-stack-bg: #021022;
+  --progress-bg: #1f2937;
+  --progress-paid: #34d399;
+  --tooltip-bg: rgba(255,255,255,0.08);
+  --tooltip-text: var(--text);
+  --sticky-text: #e6eef8;
+}
+
+body {
+  background: var(--bg);
+  padding: var(--page-padding);
+  color: var(--text);
+}
+
+.container {
+  max-width: 700px;
+  margin: auto;
+  background: var(--container-bg);
+  padding: 25px;
+  border-radius: 10px;
+  box-shadow: var(--container-shadow);
+}
+
+h1 {
+  margin: 0;
+}
+
+.top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+#themeToggle {
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: 1px solid var(--card-border);
+  background: transparent;
+  color: var(--text);
+  cursor: pointer;
+}
+
+#themeToggle:hover { background: var(--progress-bg); }
+
+/* Sticky small header */
+.sticky-header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: var(--container-bg);
+  border-bottom: 1px solid var(--card-border);
+  color: var(--sticky-text);
+  display: none; /* hidden by default on wide screens */
+}
+.sticky-inner {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 8px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.sticky-header {
+  transition: transform 320ms ease, box-shadow 320ms ease, opacity 240ms ease;
+}
+.sticky-hidden {
+  transform: translateY(-120%);
+  opacity: 0;
+  box-shadow: none;
+}
+.sticky-title { font-weight: 600; color: var(--sticky-text); }
+.sticky-actions button { margin-left: 8px; padding:6px 10px; border-radius:6px; border:1px solid var(--card-border); background:transparent; color: var(--sticky-text); cursor:pointer; }
+.sticky-actions button:hover { background: var(--progress-bg); }
+
+form {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 10px;
+}
+
+form button {
+  grid-column: 1 / -1;
+  padding: 10px;
+  background: var(--primary);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+form button:hover { background: var(--primary-hover); }
+
+.debt {
+  margin-top: 20px;
+  padding: 15px;
+  border: 1px solid var(--card-border);
+  border-radius: 8px;
+}
+
+.debt-header { display: flex; justify-content: space-between; font-weight: bold; }
+
+.debt-header button { margin-left: 6px; background: transparent; border: none; cursor: pointer; font-size: 14px; }
+
+.balance-editor { display: flex; gap: 8px; align-items: center; margin: 6px 0; }
+
+.balance-editor input { width: 160px; padding: 6px; border: 1px solid var(--input-border); border-radius: 4px; }
+
+.balance-editor button { padding: 6px 10px; border: none; border-radius: 4px; cursor: pointer; }
+
+.balance-editor button:first-of-type { background: var(--success); color: white; }
+.balance-editor button:last-of-type { background: var(--danger); color: white; }
+
+.progress { height: 10px; background: var(--progress-bg); border-radius: 5px; margin-top: 10px; }
+.progress-bar { height: 100%; background: var(--progress-paid); border-radius: 5px; }
+
+/* Circular progress */
+.circular-wrap { position: relative; width: 80px; height: 80px; display: inline-block; vertical-align: middle; margin-top: 8px; }
+.circular { width: 100%; height: 100%; transform: rotate(-90deg); }
+.circle-bg { fill: none; stroke: var(--progress-bg); stroke-width: 3.5; }
+.circle-paid { fill: none; stroke: var(--progress-paid); stroke-width: 3.5; stroke-linecap: round; transition: stroke-dasharray 0.6s ease; }
+.circular-center { position: absolute; left: 0; top: 0; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-size: 12px; color: var(--text); }
+
+.payment-row { display: flex; gap: 8px; align-items: center; margin-top: 8px; }
+.payment-row input { width: 120px; padding: 6px; border: 1px solid var(--input-border); border-radius: 4px; }
+.payment-row button { padding: 6px 10px; border: none; border-radius: 4px; background: var(--primary); color: white; cursor: pointer; }
+.payment-row button:hover { background: var(--primary-hover); }
+
+.history { margin-top: 10px; padding: 8px; border-top: 1px dashed var(--progress-bg); }
+.payment-item { font-size: 12px; color: var(--text); margin-bottom: 6px; }
+
+.allocation { margin-top: 20px; padding: 12px; border: 1px solid var(--card-border); border-radius: 8px; background: var(--chart-bg); }
+.allocate-row { display: flex; gap: 8px; align-items: center; }
+.allocate-row input, .allocate-row select { padding: 6px; border: 1px solid var(--input-border); border-radius: 4px; }
+
+/* Make form inputs visually match allocation inputs */
+form input, form select { padding: 6px; border: 1px solid var(--input-border); border-radius: 4px; width: 100%; }
+form input[type="number"]::-webkit-inner-spin-button, form input[type="number"]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+
+.allocate-row button { padding: 6px 10px; background: var(--success); border: none; color: white; border-radius: 4px; cursor: pointer; }
+
+.history-btn, .undo-btn { padding: 6px 8px; border: none; background: #f3f4f6; border-radius: 4px; cursor: pointer; }
+.undo-btn { background: var(--danger); color: white; }
+.history-btn:hover { background: var(--progress-bg); }
+.undo-btn:hover { background: var(--danger); }
+
+/* Payments chart */
+#paymentsSection { margin-top: 20px; }
+.payments-chart { display: flex; flex-direction: column; gap: 8px; padding: 12px; border: 1px solid var(--card-border); background: var(--chart-bg); border-radius: 8px; }
+.chart-legend { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:8px; }
+.legend-item { display:flex; gap:6px; align-items:center; font-size:13px; color:var(--subtext); }
+.legend-swatch { width:14px; height:14px; border-radius:3px; display:inline-block }
+.legend-label { font-size:13px }
+
+.chart-bars { display:flex; gap:12px; align-items:end; overflow-x:auto; padding: 8px 4px; }
+.bar-item { display: flex; flex-direction: column; align-items: center; width: 80px; }
+.bar-stack { display:flex; flex-direction:column-reverse; justify-content:flex-end; height:160px; width:36px; background:var(--chart-stack-bg); border-radius:4px; overflow:hidden }
+.bar-segment { width:100%; transition: height .4s; }
+.bar-label { font-size: 11px; margin-top: 6px; color:var(--subtext); text-align:center; }
+.bar-amt { font-size: 12px; color:var(--text); font-weight:bold; margin-top:4px; }
+.no-payments { padding: 12px; color: var(--muted); }
+
+.chart-tooltip { position: absolute; pointer-events: none; background: var(--tooltip-bg); color: var(--tooltip-text); padding: 8px 10px; border-radius:6px; font-size:12px; display:none; z-index:9999 }
+
+/* Dashboard layout: chart left, debt list right on wide screens */
+.dashboard {
+  display: grid;
+  grid-template-columns: 1fr 420px;
+  gap: 20px;
+  align-items: start;
+}
+
+.debt-list { display:flex; flex-direction:column; gap:12px; }
+
+/* Make forms/inputs full width on small screens */
+@media (max-width: 800px) {
+  .dashboard { grid-template-columns: 1fr; }
+  .chart-bars { height: 160px; }
+  .bar-item { width: 60px; }
+  form input, form select, form button, .payment-row input, .allocate-row input, .allocate-row select { width: 100%; }
+  .allocate-row { flex-direction: column; align-items: stretch; }
+  .payment-row { flex-direction: column; align-items: stretch; }
+  /* show sticky header on small screens */
+  .sticky-header { display: block; }
+}
+
+
